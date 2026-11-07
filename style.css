@@ -1,0 +1,1236 @@
+/* ==========================================================================
+   DIWALI EXTRAVAGANZA - CORE STYLES & RESET
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+:root {
+  --midnight-blue: #040316;
+  --royal-purple: #1a082d;
+  --deep-crimson: #2f061e;
+  --gold-primary: #ffd700;
+  --gold-secondary: #f4a200;
+  --gold-tertiary: #ffe97d;
+  --amber-orange: #ff7700;
+  --marigold: #ffa000;
+  --glass-bg: rgba(22, 11, 41, 0.65);
+  --glass-border: rgba(255, 215, 0, 0.4);
+  --font-serif: 'Rozha One', 'Cinzel Decorative', serif;
+  --font-cursive: 'Great Vibes', cursive;
+  --font-sans: 'Poppins', sans-serif;
+  --box-shadow-gold: 0 0 25px rgba(255, 215, 0, 0.45);
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 30%, var(--royal-purple) 0%, var(--deep-crimson) 45%, var(--midnight-blue) 100%);
+  color: #fff8e7;
+  font-family: var(--font-sans);
+  position: relative;
+}
+
+/* ==========================================================================
+   CANVAS & AMBIENT DUST PARTICLES
+   ========================================================================== */
+#fireworksCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+.ambient-stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.star-speck {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff, var(--gold-primary) 60%, transparent);
+  animation: floatUp 8s linear infinite, starPulse 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(105vh) scale(0.6); opacity: 0; }
+  20% { opacity: 0.9; }
+  80% { opacity: 0.9; }
+  100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+}
+
+@keyframes starPulse {
+  0% { filter: drop-shadow(0 0 2px var(--gold-primary)); }
+  100% { filter: drop-shadow(0 0 12px var(--gold-tertiary)); }
+}
+
+/* ==========================================================================
+   DECORATIVE BORDERS & HANGING KANDILS
+   ========================================================================== */
+.corner-rangoli {
+  position: fixed;
+  width: 130px;
+  height: 130px;
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0.85;
+  background-image: radial-gradient(circle, transparent 40%, rgba(255, 215, 0, 0.3) 41%, transparent 43%),
+                    repeating-conic-gradient(from 0deg, var(--gold-primary) 0deg 15deg, transparent 15deg 30deg);
+  mask-image: radial-gradient(circle at center, black 65%, transparent 70%);
+  -webkit-mask-image: radial-gradient(circle at center, black 65%, transparent 70%);
+  filter: drop-shadow(0 0 8px rgba(255, 170, 0, 0.6));
+  animation: rangoliSpin 60s linear infinite;
+}
+
+.corner-rangoli.top-left { top: -45px; left: -45px; }
+.corner-rangoli.top-right { top: -45px; right: -45px; }
+.corner-rangoli.bottom-left { bottom: -45px; left: -45px; }
+.corner-rangoli.bottom-right { bottom: -45px; right: -45px; }
+
+@keyframes rangoliSpin {
+  100% { transform: rotate(360deg); }
+}
+
+.hanging-lantern {
+  position: fixed;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform-origin: top center;
+  animation: lanternSway 4s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.hanging-lantern.lantern-left { left: 4%; }
+.hanging-lantern.lantern-right { right: 4%; animation-delay: -2s; }
+
+.chain {
+  width: 2px;
+  height: 70px;
+  background: repeating-linear-gradient(to bottom, #ffd700, #b8860b 8px, #332100 10px);
+}
+
+.kandil {
+  width: 50px;
+  height: 50px;
+  position: relative;
+}
+
+.kandil-core {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #ff4500, #ffd700);
+  transform: rotate(45deg);
+  border: 2px solid #ffd700;
+  box-shadow: 0 0 25px rgba(255, 120, 0, 0.9), inset 0 0 10px #ffea70;
+  animation: glowPulse 2s ease-in-out infinite alternate;
+}
+
+.streamers {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+}
+
+.streamers span {
+  width: 3px;
+  height: 45px;
+  background: linear-gradient(to bottom, #ffd700, transparent);
+  border-radius: 2px;
+}
+
+@keyframes lanternSway {
+  0% { transform: rotate(-5deg); }
+  100% { transform: rotate(5deg); }
+}
+
+@keyframes glowPulse {
+  0% { filter: brightness(0.9) drop-shadow(0 0 10px #ff9900); }
+  100% { filter: brightness(1.3) drop-shadow(0 0 30px #ffe100); }
+}
+
+/* ==========================================================================
+   NAVIGATION & CONTROLS
+   ========================================================================== */
+.top-nav {
+  position: fixed;
+  top: 15px;
+  left: 0;
+  width: 100%;
+  padding: 0 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 50;
+  pointer-events: auto;
+}
+
+.festive-badge {
+  font-family: 'Yatra One', cursive;
+  font-size: 1.15rem;
+  color: var(--gold-primary);
+  text-shadow: 0 0 12px rgba(255, 215, 0, 0.8);
+  letter-spacing: 1px;
+}
+
+.nav-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.icon-btn {
+  background: rgba(30, 14, 56, 0.65);
+  border: 1px solid var(--gold-border);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: var(--gold-primary);
+  font-size: 1.2rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.icon-btn:hover {
+  transform: scale(1.15) rotate(10deg);
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+}
+
+/* ==========================================================================
+   ROYAL BUTTONS & GLASS CARDS
+   ========================================================================== */
+.royal-btn {
+  position: relative;
+  background: linear-gradient(135deg, #ffaa00 0%, #ff5500 50%, #d4af37 100%);
+  color: #1a082d;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 1.2px;
+  padding: 16px 36px;
+  border-radius: 50px;
+  border: 2px solid var(--gold-tertiary);
+  cursor: pointer;
+  box-shadow: 0 6px 25px rgba(255, 140, 0, 0.5), inset 0 2px 2px #fff;
+  transition: all 0.4s ease;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.royal-btn:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 12px 35px rgba(255, 180, 0, 0.8), inset 0 2px 5px #fff;
+}
+
+.royal-btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.royal-btn.secondary {
+  background: rgba(26, 8, 45, 0.75);
+  color: var(--gold-primary);
+  border: 1.5px solid var(--gold-primary);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.royal-btn.secondary:hover {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 100, 0, 0.2));
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+}
+
+.pulse-glow {
+  animation: buttonPulse 2.2s infinite alternate ease-in-out;
+}
+
+@keyframes buttonPulse {
+  0% { box-shadow: 0 0 15px rgba(255, 170, 0, 0.5); }
+  100% { box-shadow: 0 0 35px rgba(255, 215, 0, 0.95); }
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 28px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 215, 0, 0.2);
+  padding: 45px 35px;
+  text-align: center;
+}
+
+/* ==========================================================================
+   SCENE WRAPPER & CINEMATIC TRANSITIONS
+   ========================================================================== */
+.scene {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 20px 40px;
+  z-index: 10;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), visibility 0.8s;
+}
+
+.scene.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.95) translateY(20px);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   SECTION 1: MAGICAL INTRODUCTION
+   ========================================================================== */
+.intro-card {
+  max-width: 600px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.grand-lantern-wrapper {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.grand-lantern {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: floatGentle 3s ease-in-out infinite alternate;
+}
+
+.lantern-dome {
+  width: 65px;
+  height: 25px;
+  background: linear-gradient(to right, #b8860b, #ffd700, #b8860b);
+  border-radius: 25px 25px 0 0;
+  border-bottom: 2px solid #5a3d00;
+}
+
+.lantern-body {
+  width: 85px;
+  height: 100px;
+  background: radial-gradient(circle at center, #fff 0%, #ff8800 60%, #8a1700 100%);
+  border-radius: 12px;
+  border: 3px solid #ffd700;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 50px rgba(255, 140, 0, 0.9), inset 0 0 20px #ffea00;
+}
+
+.lantern-light {
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(255, 235, 120, 0.35) 0%, transparent 70%);
+  animation: flameFlicker 1.8s infinite alternate ease-in-out;
+}
+
+.om-symbol {
+  font-family: 'Rozha One', serif;
+  font-size: 2.4rem;
+  color: #3b0900;
+  font-weight: 900;
+  text-shadow: 0 0 8px #ffe57f;
+}
+
+.lantern-base {
+  width: 70px;
+  height: 18px;
+  background: linear-gradient(to right, #b8860b, #ffd700, #b8860b);
+  border-radius: 0 0 10px 10px;
+}
+
+.grand-tassels {
+  display: flex;
+  gap: 7px;
+  margin-top: 2px;
+}
+
+.grand-tassels i {
+  width: 3px;
+  height: 30px;
+  background: linear-gradient(to bottom, #ffd700, transparent);
+  border-radius: 2px;
+}
+
+.intro-diya-orbit {
+  position: absolute;
+  width: 160%;
+  left: -30%;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.sub-greeting {
+  font-family: var(--font-cursive);
+  font-size: 2.2rem;
+  color: var(--gold-tertiary);
+  margin-bottom: 10px;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+}
+
+.intro-heading {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #ffffff 10%, #ffd700 60%, #ff8800 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 35px;
+  line-height: 1.3;
+}
+
+@keyframes floatGentle {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-12px); }
+}
+
+/* ==========================================================================
+   REALISTIC DIYA & FLAME MECHANISM
+   ========================================================================== */
+.diya {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.diya:hover {
+  transform: translateY(-5px) scale(1.03);
+}
+
+.diya-clay {
+  width: 80px;
+  height: 38px;
+  background: linear-gradient(to bottom, #c85a17 0%, #7e2c04 60%, #3e1201 100%);
+  border-radius: 0 0 80px 80px;
+  border-top: 5px solid #e27d3b;
+  position: relative;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.7), inset 0 2px 4px #ffbe76;
+}
+
+.diya-clay::before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 10px;
+  background: radial-gradient(ellipse at center, #632203 0%, #350f00 90%);
+  border-radius: 50%;
+  border: 1px solid #c85a17;
+}
+
+.diya-flame {
+  width: 22px;
+  height: 42px;
+  background: radial-gradient(ellipse at 50% 80%, #ffffff 0%, #ffee55 35%, #ff7700 75%, rgba(255, 40, 0, 0) 100%);
+  border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%;
+  transform-origin: center bottom;
+  position: relative;
+  margin-bottom: -4px;
+  z-index: 3;
+  opacity: 0;
+  transform: scale(0.2);
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.diya.is-lit .diya-flame {
+  opacity: 1;
+  transform: scale(1);
+  animation: realisticFlicker 0.12s infinite alternate ease-in-out;
+}
+
+.flame-glow {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  top: -45px;
+  background: radial-gradient(circle, rgba(255, 170, 0, 0.45) 0%, rgba(255, 100, 0, 0.15) 45%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.diya.is-lit .flame-glow {
+  opacity: 1;
+  animation: auraBreath 2.2s infinite alternate ease-in-out;
+}
+
+@keyframes realisticFlicker {
+  0% { transform: scale(1) rotate(-1.5deg); filter: drop-shadow(0 0 10px #ffbb00); }
+  50% { transform: scale(1.06, 0.96) rotate(1.8deg); filter: drop-shadow(0 0 16px #ff7b00); }
+  100% { transform: scale(0.97, 1.04) rotate(-0.8deg); filter: drop-shadow(0 0 12px #ffbb00); }
+}
+
+@keyframes auraBreath {
+  0% { transform: scale(0.92); opacity: 0.6; }
+  100% { transform: scale(1.15); opacity: 0.95; }
+}
+
+/* Centerpiece Diya Scale */
+.large-diya .diya-clay {
+  width: 130px;
+  height: 58px;
+  border-top-width: 7px;
+}
+.large-diya .diya-flame {
+  width: 34px;
+  height: 60px;
+  margin-bottom: -6px;
+}
+.large-diya .flame-glow {
+  width: 260px;
+  height: 260px;
+  top: -90px;
+}
+
+/* ==========================================================================
+   SECTION 2: MAIN DIWALI CELEBRATION
+   ========================================================================== */
+.celebration-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 900px;
+  width: 100%;
+}
+
+.flower-garland {
+  display: flex;
+  gap: 15px;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 8px rgba(255, 140, 0, 0.8));
+  animation: garlandSway 3s ease-in-out infinite alternate;
+}
+
+@keyframes garlandSway {
+  0% { transform: translateY(-4px) scale(0.98); }
+  100% { transform: translateY(4px) scale(1.02); }
+}
+
+.grand-diwali-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.6rem, 7vw, 5.2rem);
+  font-weight: 900;
+  letter-spacing: 3px;
+  background: linear-gradient(135deg, #fff 0%, #ffd700 40%, #ff8c00 80%, #fff 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmerText 5s linear infinite;
+  text-shadow: 0 0 35px rgba(255, 215, 0, 0.6);
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+@keyframes shimmerText {
+  to { background-position: 200% center; }
+}
+
+.grand-subquote {
+  font-family: var(--font-cursive);
+  font-size: clamp(1.6rem, 3.8vw, 2.6rem);
+  color: var(--gold-tertiary);
+  max-width: 750px;
+  margin: 0 auto 35px;
+  line-height: 1.35;
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+}
+
+.center-diya-pedestal {
+  margin-bottom: 35px;
+  position: relative;
+}
+
+/* ==========================================================================
+   SECTION 3: INTERACTIVE DIYA EXPERIENCE
+   ========================================================================== */
+.interactive-stage {
+  max-width: 950px;
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.section-header {
+  margin-bottom: 30px;
+}
+
+.sub-badge {
+  display: inline-block;
+  padding: 5px 18px;
+  background: rgba(255, 215, 0, 0.15);
+  border: 1px solid var(--gold-primary);
+  border-radius: 20px;
+  color: var(--gold-primary);
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  color: #fff;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+  margin-bottom: 10px;
+}
+
+.section-desc {
+  color: #e2d2ff;
+  font-size: 1.05rem;
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+.diyas-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 35px 25px;
+  margin-bottom: 35px;
+  width: 100%;
+}
+
+.diya-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px dashed rgba(255, 215, 0, 0.3);
+  border-radius: 18px;
+  min-width: 130px;
+  transition: all 0.4s ease;
+}
+
+.diya-card.card-lit {
+  background: rgba(255, 215, 0, 0.12);
+  border: 1px solid var(--gold-primary);
+  box-shadow: 0 0 25px rgba(255, 170, 0, 0.4);
+}
+
+.diya-name {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--gold-tertiary);
+  letter-spacing: 1px;
+}
+
+.wish-reveal-box {
+  min-height: 70px;
+  max-width: 650px;
+  width: 100%;
+  background: rgba(20, 10, 38, 0.7);
+  border: 1.5px solid var(--gold-primary);
+  border-radius: 16px;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  backdrop-filter: blur(8px);
+  box-shadow: inset 0 0 15px rgba(255, 215, 0, 0.2);
+}
+
+.wish-prompt {
+  color: #c7a4ff;
+  font-style: italic;
+  font-size: 1.05rem;
+}
+
+.wish-active {
+  font-family: var(--font-cursive);
+  font-size: 1.9rem;
+  color: #fff;
+  text-shadow: 0 0 15px #ffd700;
+  animation: fadeInPop 0.5s ease;
+}
+
+@keyframes fadeInPop {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ==========================================================================
+   SECTION 4: SPECIAL MESSAGE CARD (ROYAL ENVELOPE)
+   ========================================================================== */
+.envelope-scene-wrapper {
+  max-width: 700px;
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.envelope-container {
+  position: relative;
+  width: 320px;
+  height: 220px;
+  margin: 30px auto;
+  perspective: 1000px;
+}
+
+.envelope {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #a31d1d;
+  border-radius: 8px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 215, 0, 0.3);
+  transition: transform 0.6s ease;
+}
+
+.envelope-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #750d0d;
+  border-radius: 8px;
+}
+
+.envelope-front {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 160px 120px 160px;
+  border-color: transparent transparent #8f1313 transparent;
+  z-index: 4;
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 120px 160px 0 160px;
+  border-color: #ba2222 transparent transparent transparent;
+  transform-origin: top center;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 5;
+}
+
+.wax-seal {
+  position: absolute;
+  top: -100px;
+  left: -22px;
+  width: 44px;
+  height: 44px;
+  background: radial-gradient(circle, #ffd700 0%, #b8860b 80%, #573f00 100%);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5), 0 0 12px rgba(255, 215, 0, 0.8);
+  border: 1px solid #fff;
+}
+
+/* Open Envelope Animation State */
+.envelope.is-open .envelope-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.letter-paper {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  width: 300px;
+  height: 200px;
+  background: #fffdf5;
+  border-radius: 8px;
+  padding: 16px;
+  z-index: 3;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+  transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  overflow: hidden;
+  color: #311802;
+  text-align: left;
+}
+
+.envelope.is-open .letter-paper {
+  transform: translateY(-130px) scale(1.08);
+  height: 380px;
+  width: 320px;
+  left: 0;
+  z-index: 10;
+  overflow-y: auto;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.85);
+}
+
+.letter-inner-border {
+  border: 2px dashed #d4af37;
+  padding: 14px 16px;
+  height: 100%;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+}
+
+.letter-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #d4af37;
+  padding-bottom: 6px;
+  margin-bottom: 12px;
+}
+
+.seal-om {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  color: #a31d1d;
+}
+
+.festive-salute {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #7b2605;
+}
+
+.letter-content {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #271404;
+  flex-grow: 1;
+  white-space: pre-wrap;
+}
+
+.letter-footer {
+  margin-top: 10px;
+  text-align: right;
+  font-family: var(--font-cursive);
+  font-size: 1.4rem;
+  color: #8b0000;
+}
+
+.letter-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+/* ==========================================================================
+   SECTION 5: FIREWORKS CELEBRATION
+   ========================================================================== */
+.fireworks-overlay-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 82%;
+  width: 100%;
+  pointer-events: none;
+}
+
+.festive-firework-banner {
+  text-align: center;
+  pointer-events: auto;
+}
+
+.sky-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  color: #fff;
+  text-shadow: 0 0 25px #ffd700, 0 0 50px #ff5500;
+}
+
+.sky-subtitle {
+  color: var(--gold-tertiary);
+  font-size: 1.15rem;
+  margin-top: 8px;
+}
+
+.floating-wishes-carousel {
+  pointer-events: none;
+}
+
+.wish-pill {
+  background: rgba(22, 11, 41, 0.7);
+  border: 1.5px solid var(--gold-primary);
+  border-radius: 40px;
+  padding: 12px 30px;
+  font-family: var(--font-cursive);
+  font-size: 2.2rem;
+  color: var(--gold-tertiary);
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 30px rgba(255, 170, 0, 0.5);
+  animation: wishFloat 3s infinite alternate ease-in-out;
+}
+
+@keyframes wishFloat {
+  0% { transform: translateY(-5px); }
+  100% { transform: translateY(5px); }
+}
+
+.fireworks-controls {
+  pointer-events: auto;
+  display: flex;
+  gap: 15px;
+}
+
+/* ==========================================================================
+   SECTION 6: FINAL 3D GIFT BOX SURPRISE
+   ========================================================================== */
+.gift-scene-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 650px;
+  width: 90%;
+  position: relative;
+}
+
+.gift-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  color: var(--gold-primary);
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+  margin-bottom: 6px;
+}
+
+.gift-sub {
+  color: #d6beff;
+  font-size: 1.05rem;
+  margin-bottom: 35px;
+}
+
+.gift-box-3d-wrapper {
+  perspective: 1200px;
+  margin-bottom: 25px;
+  cursor: pointer;
+}
+
+.gift-box {
+  width: 150px;
+  height: 140px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease;
+}
+
+.gift-box:hover {
+  transform: scale(1.05) rotateY(8deg);
+}
+
+.box-base {
+  position: absolute;
+  bottom: 0;
+  width: 150px;
+  height: 105px;
+  background: linear-gradient(135deg, #ffd700 0%, #b8860b 50%, #7d5900 100%);
+  border-radius: 6px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(255, 255, 255, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.box-lid {
+  position: absolute;
+  top: 15px;
+  left: -5px;
+  width: 160px;
+  height: 35px;
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  z-index: 10;
+  transition: all 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.lid-top {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #ffe066 0%, #d4af37 60%, #997300 100%);
+  border-radius: 8px 8px 2px 2px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.lid-rim {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 5px;
+  background: #6b4e00;
+}
+
+/* Ribbons */
+.ribbon.vertical {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 26px;
+  height: 100%;
+  background: linear-gradient(to right, #b30000, #ff1a1a, #b30000);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+}
+
+.ribbon.horizontal {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 26px;
+  background: linear-gradient(to bottom, #b30000, #ff1a1a, #b30000);
+}
+
+.bow {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bow-center {
+  width: 18px;
+  height: 18px;
+  background: #ff1a1a;
+  border-radius: 50%;
+  z-index: 3;
+  box-shadow: 0 0 6px rgba(0,0,0,0.6);
+}
+
+.bow-loop {
+  width: 32px;
+  height: 22px;
+  border: 5px solid #ff1a1a;
+  border-radius: 50%;
+}
+.bow-loop.left { transform: rotate(-25deg) translateX(6px); }
+.bow-loop.right { transform: rotate(25deg) translateX(-6px); }
+
+/* Gift Opened State */
+.gift-box.opened .box-lid {
+  transform: translateY(-90px) rotateX(120deg) rotateZ(-15deg);
+  opacity: 0.85;
+}
+
+.inner-glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, #fff 0%, #ffd700 60%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.gift-box.opened .inner-glow {
+  opacity: 1;
+  animation: glowEmanate 1.5s infinite alternate;
+}
+
+@keyframes glowEmanate {
+  0% { filter: blur(5px) brightness(1); }
+  100% { filter: blur(14px) brightness(1.6); }
+}
+
+/* Final Reveal Message Card */
+.final-reveal-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.6);
+  opacity: 0;
+  pointer-events: none;
+  width: 100%;
+  max-width: 550px;
+  transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  z-index: 20;
+}
+
+.final-reveal-card.show {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.final-card-glass {
+  background: rgba(18, 5, 36, 0.92);
+  border: 2px solid var(--gold-primary);
+  border-radius: 28px;
+  padding: 40px 30px;
+  box-shadow: 0 0 60px rgba(255, 170, 0, 0.6), inset 0 0 20px rgba(255, 215, 0, 0.2);
+}
+
+.diya-pair {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.mini-diya {
+  width: 32px;
+  height: 16px;
+  background: #b54507;
+  border-radius: 0 0 32px 32px;
+  position: relative;
+}
+
+.mini-flame {
+  width: 10px;
+  height: 18px;
+  background: radial-gradient(#fff, #ff8800);
+  border-radius: 50%;
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: realisticFlicker 0.15s infinite alternate;
+}
+
+.om-tag {
+  font-size: 1.8rem;
+  color: var(--gold-primary);
+}
+
+.final-line-1 {
+  font-family: var(--font-cursive);
+  font-size: clamp(2rem, 4.5vw, 2.7rem);
+  color: #fff;
+  text-shadow: 0 0 20px #ffd700;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.final-line-2 {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  color: var(--gold-secondary);
+  margin-bottom: 25px;
+}
+
+/* ==========================================================================
+   RESPONSIVENESS (PHONES & TABLETS)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .hanging-lantern {
+    display: none; /* Keeps mobile viewport spacious & uncluttered */
+  }
+
+  .corner-rangoli {
+    width: 90px;
+    height: 90px;
+  }
+
+  .top-nav {
+    padding: 0 16px;
+  }
+
+  .intro-card {
+    padding: 30px 20px;
+  }
+
+  .diyas-grid {
+    gap: 15px 12px;
+  }
+
+  .diya-card {
+    min-width: 95px;
+    padding: 10px;
+  }
+
+  .diya-clay {
+    width: 65px;
+    height: 32px;
+  }
+
+  .envelope-container {
+    transform: scale(0.85);
+    margin: 10px auto;
+  }
+
+  .envelope.is-open .letter-paper {
+    transform: translateY(-90px) scale(1);
+    height: 330px;
+    width: 290px;
+  }
+
+  .letter-content {
+    font-size: 0.82rem;
+  }
+
+  .royal-btn {
+    padding: 13px 25px;
+    font-size: 0.95rem;
+  }
+}

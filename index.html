@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>✨ Shubh Deepawali | Magical Diwali Celebration ✨</title>
+  
+  <!-- Premium Festive Indian Typography (Google Fonts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Great+Vibes&family=Rozha+One&family=Yatra+One&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Fullscreen Particle & Fireworks Canvas -->
+  <canvas id="fireworksCanvas"></canvas>
+
+  <!-- Ambient Golden Floating Dust Layer -->
+  <div class="ambient-stars" id="ambientStars"></div>
+
+  <!-- Decorative Corner Rangolis (Pure SVG) -->
+  <div class="corner-rangoli top-left"></div>
+  <div class="corner-rangoli top-right"></div>
+  <div class="corner-rangoli bottom-left"></div>
+  <div class="corner-rangoli bottom-right"></div>
+
+  <!-- Traditional Hanging Torans / Golden Lanterns -->
+  <div class="hanging-lantern lantern-left">
+    <div class="chain"></div>
+    <div class="kandil">
+      <div class="kandil-core"></div>
+      <div class="streamers"><span></span><span></span><span></span><span></span></div>
+    </div>
+  </div>
+  <div class="hanging-lantern lantern-right">
+    <div class="chain"></div>
+    <div class="kandil">
+      <div class="kandil-core"></div>
+      <div class="streamers"><span></span><span></span><span></span><span></span></div>
+    </div>
+  </div>
+
+  <!-- Top Floating Controls -->
+  <header class="top-nav">
+    <div class="festive-badge">🪔 शुभ दीपावली</div>
+    <div class="nav-actions">
+      <button id="soundToggle" class="icon-btn" aria-label="Toggle Sound" title="Festive Music & Sfx">
+        <span class="icon">🔇</span>
+      </button>
+      <button id="restartBtn" class="icon-btn" aria-label="Restart Celebration" title="Replay Experience">
+        <span class="icon">🔄</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==============================================
+       SCENE 1: MAGICAL INTRODUCTION
+       ============================================== -->
+  <section id="scene-intro" class="scene active">
+    <div class="glass-card intro-card">
+      <div class="grand-lantern-wrapper">
+        <div class="grand-lantern">
+          <div class="lantern-dome"></div>
+          <div class="lantern-body">
+            <div class="lantern-light"></div>
+            <div class="om-symbol">ॐ</div>
+          </div>
+          <div class="lantern-base"></div>
+          <div class="grand-tassels">
+            <i></i><i></i><i></i><i></i><i></i>
+          </div>
+        </div>
+        <!-- Surrounding Diyas -->
+        <div class="intro-diya-orbit">
+          <div class="mini-diya left"><div class="mini-flame"></div></div>
+          <div class="mini-diya right"><div class="mini-flame"></div></div>
+        </div>
+      </div>
+
+      <p class="sub-greeting">A Little Festival Surprise For You...</p>
+      <h1 class="intro-heading">Welcome to the Festival of Lights</h1>
+
+      <button id="btnOpenSurprise" class="royal-btn pulse-glow">
+        <span class="btn-text">OPEN YOUR SURPRISE ✨</span>
+        <span class="btn-shimmer"></span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ==============================================
+       SCENE 2: MAIN DIWALI CELEBRATION
+       ============================================== -->
+  <section id="scene-celebration" class="scene hidden">
+    <div class="celebration-container">
+      <div class="light-ray-burst"></div>
+      
+      <div class="flower-garland">
+        <span class="marigold">🌼</span><span class="marigold orange">🏵️</span>
+        <span class="marigold">🌼</span><span class="marigold orange">🏵️</span>
+        <span class="marigold">🌼</span><span class="marigold orange">🏵️</span>
+        <span class="marigold">🌼</span>
+      </div>
+
+      <h1 class="grand-diwali-title">
+        <span class="sparkle-word left">✨</span>
+        HAPPY DIWALI
+        <span class="sparkle-word right">✨</span>
+      </h1>
+
+      <p class="grand-subquote">
+        "May your life always shine brighter than a thousand diyas."
+      </p>
+
+      <!-- Centerpiece Diya -->
+      <div class="center-diya-pedestal">
+        <div class="diya large-diya is-lit">
+          <div class="flame-glow"></div>
+          <div class="diya-flame">
+            <div class="flame-core"></div>
+          </div>
+          <div class="diya-clay"></div>
+        </div>
+      </div>
+
+      <div class="scene-nav-group">
+        <button id="toDiyasBtn" class="royal-btn secondary">
+          <span>Light the Sacred Diyas 🪔</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================
+       SCENE 3: INTERACTIVE DIYA EXPERIENCE
+       ============================================== -->
+  <section id="scene-diyas" class="scene hidden">
+    <div class="interactive-stage">
+      <div class="section-header">
+        <span class="sub-badge">Tap Each Diya</span>
+        <h2 class="section-title">Light Up Your Happiness 🪔</h2>
+        <p class="section-desc">Awaken the golden flames to unlock traditional festive blessings.</p>
+      </div>
+
+      <div class="diyas-grid" id="diyasGrid">
+        <!-- Rendered dynamically by script.js -->
+      </div>
+
+      <div class="wish-reveal-box" id="diyaWishBox">
+        <span class="wish-prompt">Click any diya to ignite light and joy</span>
+      </div>
+
+      <div class="action-footer">
+        <button id="toLetterBtn" class="royal-btn">
+          <span>Read Your Special Diwali Letter 💌</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================
+       SCENE 4: SPECIAL MESSAGE CARD (ENVELOPE)
+       ============================================== -->
+  <section id="scene-letter" class="scene hidden">
+    <div class="envelope-scene-wrapper">
+      <div class="section-header">
+        <span class="sub-badge">A Heartfelt Blessing</span>
+        <h2 class="section-title">A Golden Scroll For You</h2>
+      </div>
+
+      <div class="envelope-container" id="envelopeWrapper">
+        <div class="envelope" id="envelope">
+          <div class="envelope-back"></div>
+          
+          <!-- Letter inside -->
+          <div class="letter-paper" id="letterPaper">
+            <div class="letter-inner-border">
+              <div class="letter-header">
+                <span class="seal-om">ॐ</span>
+                <span class="festive-salute">Deepawali Shubhkaamnayein</span>
+              </div>
+              <div class="letter-content" id="typewriterTarget">
+                <!-- Text typed via JS -->
+              </div>
+              <div class="letter-footer">
+                <span class="festive-signoff">With warmth, love & prayers 🙏</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="envelope-front"></div>
+          <div class="envelope-flap" id="envelopeFlap">
+            <div class="wax-seal">🪔</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="letter-actions">
+        <button id="btnOpenLetter" class="royal-btn pulse-glow">
+          <span>OPEN YOUR SPECIAL LETTER 💌</span>
+        </button>
+        <button id="toFireworksBtn" class="royal-btn secondary hidden">
+          <span>LET'S CELEBRATE 🎆</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================
+       SCENE 5: FIREWORKS CELEBRATION
+       ============================================== -->
+  <section id="scene-fireworks" class="scene hidden">
+    <div class="fireworks-overlay-content">
+      <div class="festive-firework-banner">
+        <h2 class="sky-title">Igniting The Night Sky!</h2>
+        <p class="sky-subtitle">Touch anywhere on the sky to launch spectacular fireworks!</p>
+      </div>
+
+      <div class="floating-wishes-carousel" id="fireworkWishBanner">
+        <div class="wish-pill active">✨ Prosperity & Abundance ✨</div>
+      </div>
+
+      <div class="fireworks-controls">
+        <button id="launchBurstBtn" class="royal-btn">
+          <span>BURST GRAND CRACKERS 🎆</span>
+        </button>
+        <button id="toSurpriseBtn" class="royal-btn secondary">
+          <span>Claim Final Surprise 🎁</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================
+       SCENE 6: FINAL 3D GIFT BOX SURPRISE
+       ============================================== -->
+  <section id="scene-surprise" class="scene hidden">
+    <div class="gift-scene-container">
+      <h2 class="gift-heading">ONE LAST SURPRISE FOR YOU 🎁</h2>
+      <p class="gift-sub">Tap the golden royal treasury box to unveil your parting blessing</p>
+
+      <div class="gift-box-3d-wrapper" id="giftBox">
+        <div class="gift-box">
+          <div class="box-lid" id="boxLid">
+            <div class="lid-top">
+              <div class="bow">
+                <span class="bow-loop left"></span>
+                <span class="bow-loop right"></span>
+                <span class="bow-center"></span>
+              </div>
+            </div>
+            <div class="lid-rim"></div>
+          </div>
+          <div class="box-base">
+            <div class="ribbon vertical"></div>
+            <div class="ribbon horizontal"></div>
+            <div class="inner-glow"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Final Message Reveal Card -->
+      <div class="final-reveal-card" id="finalCard">
+        <div class="final-card-glass">
+          <div class="diya-pair">
+            <div class="mini-diya lit"><div class="mini-flame"></div></div>
+            <span class="om-tag">🪔</span>
+            <div class="mini-diya lit"><div class="mini-flame"></div></div>
+          </div>
+          <h3 class="final-line-1">"Keep Shining, Keep Smiling & Keep Spreading Happiness! ❤️"</h3>
+          <p class="final-line-2">Happy Diwali Once Again! 🪔</p>
+          <div class="final-actions">
+            <button id="replayAllBtn" class="royal-btn">
+              <span>Experience Again 🔄</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
